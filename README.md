@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Full Stack, Literally: Mihir's Portfolio
 
-## Getting Started
+A portfolio where **the page is an HTTP request**. Scrolling sends `GET /` down through every layer of the stack and back as a response:
 
-First, run the development server:
+| Layer | Section | Idea |
+|---|---|---|
+| L00 Client | Hero | A request being typed into `request.http` |
+| L01 Edge / CDN | About | "Cache MISS: fetching the real person", photo with response headers |
+| L02 Frontend | UI skills | Skills as a clickable JSX component tree with a live preview |
+| L03 API Gateway | Projects | Each project is an endpoint; expand it for docs + a JSON response |
+| L04 Services | Backend skills | Animated microservice graph; hover a node for tools & proficiency |
+| L05 Database | Experience | `SELECT * FROM experience` result table, plus education |
+| L06 Response | Contact | `POST /api/contact` form that hits a real, zod-validated API route |
+
+Extras: a tracing rail that follows the request (top bar on mobile), **⌘K / Ctrl+K** command palette, **Raw mode** (the whole site as plain text, which recruiters and screen readers like), dark ("prod") / light ("staging") theme, a joke 404, and a generated OG image.
+
+## Make it yours
+
+**Edit one file: [`src/content/content.ts`](src/content/content.ts).** Every section reads from it: profile, bio, links, skills tree, projects, services, experience and education.
+
+Also:
+- Resume lives at `public/mihir_sidhdhapura_resume.pdf` (`resumeUrl` in `content.ts`).
+- Optional photo: drop `public/me.jpg` and set `photo: "/me.jpg"` in `content.ts`.
+- Set your real `domain` (used for metadata and the OG image).
+
+## Develop
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev     # http://localhost:3000
+npm run build   # production build
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Contact form email (optional)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Without configuration, messages are logged to the server console. To get them by email, create a free [Resend](https://resend.com) key and set the env vars (see `.env.example`):
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+RESEND_API_KEY=re_...
+CONTACT_TO=you@yourmail.com
+CONTACT_FROM="Portfolio <onboarding@resend.dev>"
+```
 
-## Learn More
+## Deploy
 
-To learn more about Next.js, take a look at the following resources:
+Push to GitHub and import the repo on [Vercel](https://vercel.com/new). Add the env vars above in the project settings.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Stack: Next.js 16 (App Router), TypeScript, Tailwind CSS v4, Framer Motion, Zod, Lucide.
