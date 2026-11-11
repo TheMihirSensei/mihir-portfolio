@@ -383,3 +383,81 @@ export const education: Education[] = [
     note: "CGPA 8.13 / 10",
   },
 ];
+
+/* ─────────────────────────────────────────────────────────────
+ *  Off the clock: side projects, learning, hobbies.
+ *  Shown in the "Background Jobs" layer.
+ * ───────────────────────────────────────────────────────────── */
+
+export type SideQuest = {
+  slug: string;
+  name: string;
+  tagline: string;
+  description: string;
+  /** 200 = live, 202 = in development */
+  status: 200 | 202;
+  statusNote: string;
+  live?: string;
+  liveLabel?: string;
+  tags: string[];
+  favorite?: boolean;
+};
+
+export type Learning = { topic: string; detail: string };
+
+export type Hobby = {
+  /** cron-style schedule, purely for fun */
+  schedule: string;
+  command: string;
+  comment: string;
+};
+
+export const sideQuests: SideQuest[] = [
+  {
+    slug: "otaku-shinden",
+    name: "Otaku Shinden",
+    tagline: "A hidden village for anime fans",
+    description:
+      "A community platform for anime fans that I build and run. Earn your rank, find your guild, and join events, missions, debates and watch parties. Of everything I've built, this one is closest to my heart.",
+    status: 200,
+    statusNote: "live · actively running",
+    live: "https://otakushinden.com",
+    liveLabel: "otakushinden.com",
+    tags: ["community", "anime"],
+    favorite: true,
+  },
+  {
+    slug: "whatsapp-trading-bot",
+    name: "WhatsApp Trading Bot",
+    tagline: "A fintech bot that lives inside WhatsApp",
+    description:
+      "A fintech bot for trading that runs entirely in WhatsApp chat (not real stocks). It's live and working on WhatsApp today.",
+    status: 200,
+    statusNote: "live on WhatsApp",
+    tags: ["fintech", "bot", "whatsapp"],
+  },
+  {
+    slug: "naayuki",
+    name: "Naayuki",
+    tagline: "Indian handloom, cut for the modern wardrobe",
+    description:
+      "A clothing brand I'm working on. The website is in development: Capsule 01 is taking shape.",
+    status: 202,
+    statusNote: "in development",
+    live: "https://naayuki-web-322247491424.asia-northeast1.run.app/",
+    liveLabel: "preview",
+    tags: ["fashion", "e-commerce"],
+  },
+];
+
+export const learning: Learning[] = [
+  { topic: "AI", detail: "Building with LLMs, beyond just using them" },
+  { topic: "MCP", detail: "Writing my own Model Context Protocol servers" },
+];
+
+export const hobbies: Hobby[] = [
+  { schedule: "@daily", command: "gym --mode=freak", comment: "non-negotiable" },
+  { schedule: "@whenever_possible", command: "play cricket", comment: "bat, bowl, repeat" },
+  { schedule: "@whenever_possible", command: "play badminton", comment: "" },
+  { schedule: "@inspired", command: "draw --ink", comment: "part-time artist · just completed Inktober ✓" },
+];

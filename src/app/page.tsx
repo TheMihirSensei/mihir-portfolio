@@ -6,6 +6,7 @@ import { FrontendLayer } from "@/components/layers/FrontendLayer";
 import { ApiProjects } from "@/components/layers/ApiProjects";
 import { ServicesGraph } from "@/components/layers/ServicesGraph";
 import { DatabaseExperience } from "@/components/layers/DatabaseExperience";
+import { BackgroundJobs } from "@/components/layers/BackgroundJobs";
 import { ResponseContact } from "@/components/layers/ResponseContact";
 
 /** Evaluated at build time (and on revalidation) so prerendering stays static. */
@@ -25,6 +26,7 @@ export default async function Home() {
         <ApiProjects />
         <ServicesGraph />
         <DatabaseExperience />
+        <BackgroundJobs />
         <ResponseContact />
       </Portfolio>
     </UIProvider>

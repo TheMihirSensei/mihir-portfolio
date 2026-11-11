@@ -1,7 +1,18 @@
 "use client";
 
 import { useUI } from "@/lib/ui-context";
-import { education, experience, frontendTree, profile, projects, services, type FrontendSkill } from "@/content/content";
+import {
+  education,
+  experience,
+  frontendTree,
+  hobbies,
+  learning,
+  profile,
+  projects,
+  services,
+  sideQuests,
+  type FrontendSkill,
+} from "@/content/content";
 
 const flat = (n: FrontendSkill): string[] => [n.name, ...(n.children ?? []).flatMap(flat)];
 
@@ -44,6 +55,19 @@ export function RawView() {
     ]),
     "## Education & Certifications",
     ...education.map((e) => `- ${e.degree}, ${e.institution} (${e.year})`),
+    "",
+    "## Side projects",
+    ...sideQuests.flatMap((q) => [
+      `- ${q.name} (${q.statusNote}): ${q.tagline}`,
+      `  ${q.description}`,
+      ...(q.live ? [`  link: ${q.live}`] : []),
+      "",
+    ]),
+    "## Currently learning",
+    ...learning.map((l) => `- ${l.topic}: ${l.detail}`),
+    "",
+    "## Hobbies",
+    ...hobbies.map((h) => `- ${h.command}${h.comment ? ` (${h.comment})` : ""}`),
     "",
     "## Contact",
     `email: ${profile.email}`,
