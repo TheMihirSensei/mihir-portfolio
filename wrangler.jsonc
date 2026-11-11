@@ -1,0 +1,22 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"main": ".open-next/worker.js",
+	"name": "mihir-portfolio",
+	"compatibility_date": "2026-11-01",
+	"compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+	"assets": {
+		"directory": ".open-next/assets",
+		"binding": "ASSETS"
+	},
+	"services": [
+		{
+			// Self-reference service binding; must match "name" above
+			"binding": "WORKER_SELF_REFERENCE",
+			"service": "mihir-portfolio"
+		}
+	],
+	"images": {
+		// Image optimization for next/image
+		"binding": "IMAGES"
+	}
+}
