@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import { useRef } from "react";
+import { useInView } from "framer-motion";
 import { profile } from "@/content/content";
 import { useUI } from "@/lib/ui-context";
 import { LayerSection } from "../LayerSection";
@@ -8,6 +10,9 @@ import { Reveal } from "../Reveal";
 
 export function EdgeAbout() {
   const { years } = useUI();
+  // Touch screens cannot hover, so show the photo in color while it is on screen.
+  const photoRef = useRef<HTMLDivElement>(null);
+  const photoInView = useInView(photoRef, { amount: 0.5 });
   const initials = profile.name
     .split(" ")
     .map((w) => w[0])
@@ -34,7 +39,7 @@ export function EdgeAbout() {
       <div className="grid gap-12 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
         <Reveal>
           <figure className="overflow-hidden rounded-xl border border-line bg-elev">
-            <div className="relative aspect-[4/5] overflow-hidden bg-elev-2">
+            <div ref={photoRef} data-inview={photoInView} className="group relative aspect-[4/5] overflow-hidden bg-elev-2">
               {profile.photo ? (
                 <Image
                   src={profile.photo}
@@ -42,7 +47,7 @@ export function EdgeAbout() {
                   fill
                   sizes={profile.photoFocus ? "(min-width: 768px) 80vw, 200vw" : "(min-width: 768px) 40vw, 100vw"}
                   priority={false}
-                  className="object-cover grayscale transition duration-700 hover:grayscale-0"
+                  className="object-cover grayscale transition duration-700 hover:grayscale-0 [@media(hover:none)]:group-data-[inview=true]:grayscale-0"
                   style={
                     profile.photoFocus
                       ? {
